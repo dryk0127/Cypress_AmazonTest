@@ -1,0 +1,42 @@
+
+
+1) https://www.npmjs.com addresinden :  Install the plugin by running:
+npm install --save-dev cypress-cucumber-preprocessor  
+
+
+2)Add it to your plugins:cypress/plugins/index.js
+const cucumber = require('cypress-cucumber-preprocessor').default
+
+module.exports = (on, config) => {
+  on('file:preprocessor', cucumber())
+}
+
+3)Add support for feature files to your Cypress configuration : cypress.json
+{
+  "testFiles": "**/*.feature"
+}
+
+4) package.json:
+"cypress-cucumber-preprocessor": {
+  "nonGlobalStepDefinitions": true
+}
+
+5) gherkin plugins indir => Cucumber (Gherkin) Full Support
+
+
+6)stepDef class kullanabilmek icin class'a   
+import { Given, When, And, Then } from "cypress-cucumber-preprocessor/steps";
+
+7)==========>ONEMLI
+feature class ve stepDefs classlarimizin veya package  isimleri ayni olmak zorunda
+
+
+TESTLERI CALISTIRMA
+> ./node_modules/.bin/cypress run   => Tum feature'lari calistirir
+
+> ./node_modules/.bin/cypress-tags run -e TAGS='@dataTable1'  ==> tag'i @dataTable1 olan testi calistirir
+> ./node_modules/.bin/cypress-tags run -e TAGS='@smoke'  ==> tag'i @smoke olan testi calistirir
+> ./node_modules/.bin/cypress-tags run -e TAGS='not @dataTable1'   ==> tag'i @dataTable1 haric hepsini calistirir
+> ./node_modules/.bin/cypress-tags run -e TAGS='@searchBox'  ==> 2 tane @searchBox tagi var ikisinide sirayla calistirir
+
+NOT!! => Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser ==> window isletim sistemlerinde calistirmada verilen hatada kullanilir
